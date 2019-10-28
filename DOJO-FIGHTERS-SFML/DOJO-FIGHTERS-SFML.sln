@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DOJO-FIGHTERS-SFML", "DOJO-FIGHTERS-SFML\DOJO-FIGHTERS-SFML.vcxproj", "{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Debug|x64.ActiveCfg = Debug|x64
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Debug|x64.Build.0 = Debug|x64
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Debug|x86.ActiveCfg = Debug|Win32
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Debug|x86.Build.0 = Debug|Win32
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Release|x64.ActiveCfg = Release|x64
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Release|x64.Build.0 = Release|x64
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Release|x86.ActiveCfg = Release|Win32
+		{E7FBFC0E-F8C7-4177-AC3D-2B60CE0D7383}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3B6BF31-83FB-419A-98A2-47DE240AF21B}
+	EndGlobalSection
+EndGlobal

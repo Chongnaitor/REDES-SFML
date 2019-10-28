@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de origen\Header">
+      <UniqueIdentifier>{07dcad3e-96ce-4601-8d03-0dfd01cb2019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\source">
+      <UniqueIdentifier>{1c8c2769-63ae-414d-8296-cd2a43e400f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Barra.cpp">
+      <Filter>Archivos de origen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Archivos de origen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Pelota.cpp">
+      <Filter>Archivos de origen\source</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Archivos de origen\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Barra.h">
+      <Filter>Archivos de origen\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Pelota.h">
+      <Filter>Archivos de origen\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Archivos de origen\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
