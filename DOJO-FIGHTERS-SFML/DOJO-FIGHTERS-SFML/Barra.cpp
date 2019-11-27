@@ -3,6 +3,10 @@
 Barra::Barra()
 {
 }
+void Barra::SendBarras(sf::RectangleShape& PlayerBarra, sf::RectangleShape& PlayerBarra2, sf::TcpSocket& P1, sf::TcpSocket& P2)
+{
+
+}
 void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& PlayerBarra2, sf::Event& Whatever, sf::TcpSocket& P1, sf::TcpSocket& P2)
 {
 	sf::Keyboard Controles;
@@ -14,14 +18,9 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 	PlayerBarra2.setFillColor(BarColor2);
 	PlayerBarra2.setPosition(X2, Y2);
 	PlayerBarra.setPosition(X, Y);
-	sf::Packet WS;
-	sf::Packet Arrws;
-	P1.setBlocking(false);
-	P2.setBlocking(false);
-	WS << PlayerBarra.getPosition().x << PlayerBarra.getPosition().y;
-	Arrws << PlayerBarra2.getPosition().x << PlayerBarra2.getPosition().y;
-	P2.send(Arrws);
-	P1.send(WS);
+
+	
+	
 	if (Whatever.type == sf::Event::KeyPressed)
 	{
 		if (Whatever.key.code == Controles.W)
@@ -30,9 +29,8 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 			if (Y != 0)
 			{
 				Y -= 100;
-				PlayerBarra.setPosition(X, Y);
-				WS << PlayerBarra.getPosition().x << PlayerBarra.getPosition().y;
-				P1.send(WS);
+				//PlayerBarra.setPosition(X, Y);
+				SendBarras(PlayerBarra, PlayerBarra2,  P1, P2);
 			}
 
 
@@ -43,9 +41,8 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 			if (Y != 400)
 			{
 				Y += 100;
-				PlayerBarra.setPosition(X, Y);
-				WS << PlayerBarra.getPosition().x << PlayerBarra.getPosition().y;
-				P1.send(WS);
+				SendBarras(PlayerBarra, PlayerBarra2, P1, P2);
+				
 			}
 
 		}
@@ -55,9 +52,8 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 			if (Y2 != 0)
 			{
 				Y2 -= 100;
-				PlayerBarra2.setPosition(X2, Y2);
-				Arrws << PlayerBarra2.getPosition().x << PlayerBarra2.getPosition().y;
-				P2.send(Arrws);
+				//PlayerBarra2.setPosition(X2, Y2);
+				
 			}
 
 
@@ -68,31 +64,18 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 			if (Y2 != 400)
 			{
 				Y2 += 100;
-				PlayerBarra2.setPosition(X2, Y2);
-				Arrws << PlayerBarra2.getPosition().x << PlayerBarra2.getPosition().y;
-				P2.send(Arrws);
+				//PlayerBarra2.setPosition(X2, Y2);
+				
 
 			}
 
 		}
-		P2.receive(WS);
-		if (WS >> x >> y)
-		{
-			PlayerBarra.setPosition(x, y);
-			std::cout << "Simin" << std::endl;
-		}
-		P1.receive(Arrws);
-		if (Arrws >> x2 >> y2)
-		{
-
-			PlayerBarra2.setPosition(x2, y2);
-			std::cout << "Simin" << std::endl;
-		}
+		
+	
 	}
 	
 
-	WS.clear();
-	Arrws.clear();
+
 
 }
 bool Barra::Collider(sf::RectangleShape& Barra, sf::CircleShape& Pelota)
@@ -110,3 +93,5 @@ bool Barra::Collider(sf::RectangleShape& Barra, sf::CircleShape& Pelota)
 		return false;
 	}
 }
+
+
