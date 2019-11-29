@@ -3,11 +3,10 @@
 Barra::Barra()
 {
 }
-void Barra::SendBarras(sf::RectangleShape& PlayerBarra, sf::RectangleShape& PlayerBarra2, sf::TcpSocket& P1, sf::TcpSocket& P2)
-{
 
-}
-void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& PlayerBarra2, sf::Event& Whatever, sf::TcpSocket& P1, sf::TcpSocket& P2)
+
+
+void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& PlayerBarra2, sf::Event& Whatever, sf::TcpSocket&P1)
 {
 	sf::Keyboard Controles;
 	sf::Color BarColor(255, 255, 255);
@@ -30,7 +29,7 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 			{
 				Y -= 100;
 				//PlayerBarra.setPosition(X, Y);
-				SendBarras(PlayerBarra, PlayerBarra2,  P1, P2);
+			
 			}
 
 
@@ -41,8 +40,7 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 			if (Y != 400)
 			{
 				Y += 100;
-				SendBarras(PlayerBarra, PlayerBarra2, P1, P2);
-				
+				//PlayerBarra.setPosition(X, Y);
 			}
 
 		}
@@ -71,10 +69,10 @@ void Barra::PlayerMovement(sf::RectangleShape& PlayerBarra, sf::RectangleShape& 
 
 		}
 		
+
 	
 	}
-	
-
+	//SendBarras(PlayerBarra, PlayerBarra2, P1);
 
 
 }
