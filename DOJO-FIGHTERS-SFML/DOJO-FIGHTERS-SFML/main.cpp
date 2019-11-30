@@ -27,21 +27,10 @@ void GameLoop()
 	Pelota HolaMM;
 	sf::Keyboard lmao;
 	
-	sf::Text Score1;
-	sf::Text Score2;
-	sf::Font font;
-	font.loadFromFile("Minecraft.ttf");
-	Score1.setFont(font);
-	Score2.setFont(font);
-	Score1.setStyle(sf::Text::Bold);
-	Score2.setStyle(sf::Text::Bold);
-	Score1.setCharacterSize(40);
-	Score2.setCharacterSize(40);
-	Score1.setPosition(55, 55);
-	Score2.setPosition(875, 55);
-	Score1.setFillColor(sf::Color::White);
-	Score2.setFillColor(sf::Color::White);
+	
 	sf::TcpSocket P1;
+	sf::TcpSocket P2;
+	sf::TcpSocket PelotS;
 	std::cout << "Antes de iniciar el juego tienes que conectarte." << std::endl;
 	std::cout << "P1 para jugador, P1 para jugador 2 y S para servidor" << std::endl;
 	sf::IpAddress IP = sf::IpAddress::getLocalAddress();
@@ -54,25 +43,33 @@ void GameLoop()
 		sf::TcpListener Listener;
 		Listener.listen(45000);
 		Listener.accept(P1);
+		Listener.accept(P2);
+		Listener.accept(PelotS);
 
 	}
 	else if (Decision == "P1")
 	{
 		P1.connect(IP, 45000);
+		P2.connect(IP, 45000);
+		PelotS.connect(IP, 45000);
+		
 	}
 	
 	sf::RenderWindow GameWindow(sf::VideoMode(1000, 600), "Atomic Ball");
 	GameWindow.setVerticalSyncEnabled(60);
-	sf::Vector2f PrevPosition, P2Position;
+	sf::Vector2f PrevPosition1,PrevPosition2, P1Position,P2Position,PelotaPrev,PelotaLocation;
 	P1.setBlocking(false);
-	bool Update = false;
+	P2.setBlocking(false);
+	PelotS.setBlocking(false);
 	
 
 	while (GameWindow.isOpen())
 	{
 
 		GameWindow.clear();
-		PrevPosition = Barraaa.getPosition();
+		PrevPosition1 = Barraaa.getPosition();
+		PrevPosition2 = Barra2.getPosition();
+		PelotaPrev = Pelot.getPosition();
 		sf::Event Game;
 		while (GameWindow.pollEvent(Game))
 		{
@@ -84,32 +81,53 @@ void GameLoop()
 			}
 			
 			
-				HolaM.PlayerMovement(Barraaa, Barra2, Game, P1);
+			
+			HolaM.PlayerMovement(Barraaa, Barra2, Game, P1);
 				
 			
 		
 		}
+
 		
+		HolaMM.MoverPelota(HolaM.Collider(Barraaa, Pelot), HolaM.Collider(Barra2, Pelot), Pelot);
+		HolaMM.BounderiesColider(Pelot, GameWindow);
 		sf::Packet packet;
-		if (PrevPosition != Barraaa.getPosition())
+		sf::Packet packet2;
+		sf::Packet packet3;
+		if (PrevPosition1 != Barraaa.getPosition())
 		{
 			packet << Barraaa.getPosition().x << Barraaa.getPosition().y;
 			P1.send(packet);
 		}
 		P1.receive(packet);
-		if (packet >> P2Position.x >> P2Position.y)
+		if (packet >> P1Position.x >> P1Position.y)
+		{
+			Barraaa.setPosition(P1Position);
+		}
+
+		if (PrevPosition2 != Barra2.getPosition())
+		{
+
+			packet2 << Barra2.getPosition().x << Barra2.getPosition().y;
+			P2.send(packet2);
+
+		}
+		P2.receive(packet2);
+		if (packet2 >> P2Position.x >> P2Position.y)
 		{
 			Barra2.setPosition(P2Position);
+
+
 		}
-		if (PrevPosition != Barra2.getPosition())
+		if (PelotaPrev != Pelot.getPosition())
 		{
-			packet << Barra2.getPosition().x << Barra2.getPosition().y;
-			P1.send(packet);
+			packet3 << Pelot.getPosition().x << Pelot.getPosition().y;
+			PelotS.send(packet3);
 		}
-		P1.receive(packet);
-		if (packet >> P2Position.x >> P2Position.y)
+		PelotS.receive(packet3);
+		if (packet3 >> PelotaLocation.x >> PelotaLocation.y)
 		{
-			Barraaa.setPosition(P2Position);
+			Pelot.setPosition(PelotaLocation);
 		}
 		GameWindow.draw(Barraaa);
 		GameWindow.draw(Barra2);
@@ -117,8 +135,7 @@ void GameLoop()
 		GameWindow.display();
 		
 
-		//HolaMM.MoverPelota(HolaM.Collider(Barraaa, Pelot), HolaM.Collider(Barra2, Pelot), Pelot);
-		//HolaMM.BounderiesColider(Pelot, GameWindow);
+		
 		
 		
 	}
